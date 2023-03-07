@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import ReactTable from 'react-table-6'
 import TokensProvider from '../context/TokensProvider';
@@ -16,19 +16,26 @@ export default function Table() {
             history.push(`/edit-token/${token[index].index}`);
     });
     }
+
+    useEffect(() => {
+        const storedTokens = JSON.parse(localStorage.getItem("tokens"));
+        if(localStorage.length > 0) setToken(storedTokens);
+    }, [setToken])
+
     const columns = [ {
         Cell: () => (<FontAwesomeIcon icon={faPenToSquare} onClick={redirectToEditToken}/>)
-    }, {
-        Header: 'Tokens',
-        accessor: 'tokens',
-    }, {
+    },     {
+        Header: 'Token',
+        accessor: 'token',
+      },
+      {
         Header: 'Balance',
         accessor: 'balance'
-    }];
+      }];
 
   return (
     <div>
-        <ReactTable data={token} columns={columns} defaultPageSize={2} pageSizeOptions={[2, 4, 6]} />
+        {token && (<ReactTable data={token} columns={columns} defaultPageSize={5} pageSizeOptions={[2, 4, 6]} />)}
     </div>
   )
 }

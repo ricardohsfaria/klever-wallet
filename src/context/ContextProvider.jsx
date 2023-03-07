@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import TokensProvider from './TokensProvider';
 
 export default function ContextProvider({children}) {
-    const [token, setToken] = useState([{
-        currency: '',
-        balance: 0,
-    }]);
+    const [token, setToken] = useState('');
 
     const GLOBAL_CONTEXT = useMemo(() => ({ token, setToken, }), [ token, setToken ]);
 
