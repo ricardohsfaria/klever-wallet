@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import TokensProvider from '../context/TokensProvider';
 import Logo from '../assets/logo.svg';
 import { useHistory } from 'react-router-dom';
@@ -7,7 +7,8 @@ import ShootingStar from '../assets/shooting-star.svg';
 export default function AddToken() {
   const history = useHistory();
   const { token, setToken } = useContext(TokensProvider);
-  const [newToken, setNewToken] = useState({});
+  const [newToken, setNewToken] = useState([]);
+  const [validated, setValidation] = useState(false);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -17,15 +18,25 @@ export default function AddToken() {
     }));
   };
 
-  const handleSubmit = () => {
-    if(!newToken.token || !newToken.balance) return alert('Make sure to fill both inputs');
+  const validateForm = () => {
     let tokenAlreadyExists = false;
     if(token) tokenAlreadyExists = token.some((element) => element.token === newToken.token);
     if(tokenAlreadyExists) return alert('Token already exists');
-    setToken(prevTokens => [...prevTokens, newToken])
-    localStorage.setItem("tokens", JSON.stringify([...token, newToken]));
-    history.push('/');
+    if(!newToken.token || !newToken.balance) return alert('Make sure to fill all fields');
+    setValidation(true);
   }
+
+  const handleSubmit = () => {
+    validateForm();
+    if(validated) {
+      setToken(prevTokens => [...prevTokens, newToken]);
+      history.push('/');
+    }
+  }
+
+  useEffect(() => {
+    localStorage.setItem("tokens", JSON.stringify([...token, newToken]));
+  })
 
   const handleReturn = () => {
     history.push('/');

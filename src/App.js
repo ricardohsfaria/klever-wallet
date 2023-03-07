@@ -9,9 +9,9 @@ function App() {
     <ContextProvider>
     <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/add-token" component={AddToken} />
-      <Route exact path="/edit-token:/id-do-token" component={EditToken} />
+      <Route exact path="/" component={ Home } />
+      <Route exact path="/add-token" component={ AddToken } />
+      <Route exact path="/edit-token/:id" component={ EditToken } />
     </Switch>
     </BrowserRouter>
     </ContextProvider>

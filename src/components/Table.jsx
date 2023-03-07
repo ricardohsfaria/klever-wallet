@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ReactTable from 'react-table-6'
 import TokensProvider from '../context/TokensProvider';
@@ -7,15 +7,11 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 export default function Table() {
     const history = useHistory();
-    const { token, setToken } = useContext(TokensProvider);
-
-    const redirectToEditToken = () => {
-        token.forEach((obj, index) => {
-            obj.index = index;
-            setToken(obj);
-            history.push(`/edit-token/${token[index].index}`);
-    });
-    }
+    const { token, setToken, setSelectedIndex } = useContext(TokensProvider);
+    const redirectToEditToken = (index) => {
+      setSelectedIndex(index);
+      history.push(`/edit-token/${index}`);
+    };
 
     useEffect(() => {
         const storedTokens = JSON.parse(localStorage.getItem("tokens"));
@@ -23,7 +19,7 @@ export default function Table() {
     }, [setToken])
 
     const columns = [ {
-        Cell: () => (<FontAwesomeIcon icon={faPenToSquare} onClick={redirectToEditToken}/>)
+      Cell: ({ index }) => (<FontAwesomeIcon icon={faPenToSquare} onClick={() => redirectToEditToken(index)} />)
     },     {
         Header: 'Token',
         accessor: 'token',
@@ -35,7 +31,7 @@ export default function Table() {
 
   return (
     <div>
-        {token && (<ReactTable data={token} columns={columns} defaultPageSize={5} pageSizeOptions={[2, 4, 6]} />)}
+        {token.length > 0 && (<ReactTable data={token} columns={columns} defaultPageSize={5} pageSizeOptions={[2, 4, 6]} />)}
     </div>
   )
 }
