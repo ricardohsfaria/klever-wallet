@@ -5,13 +5,16 @@ import TokensProvider from '../context/TokensProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
-
 export default function Table() {
     const history = useHistory();
-    const { token } = useContext(TokensProvider);
+    const { token, setToken } = useContext(TokensProvider);
 
     const redirectToEditToken = () => {
-        history.push('/edit-token');
+        token.forEach((obj, index) => {
+            obj.index = index;
+            setToken(obj);
+            history.push(`/edit-token/${token[index].index}`);
+    });
     }
     const columns = [ {
         Cell: () => (<FontAwesomeIcon icon={faPenToSquare} onClick={redirectToEditToken}/>)
