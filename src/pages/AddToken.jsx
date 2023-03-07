@@ -13,12 +13,15 @@ export default function AddToken() {
     const { name, value } = target;
     setNewToken(prevState => ({
       ...prevState,
-      [name]: value,
+      [name]: value.toUpperCase(),
     }));
   };
 
   const handleSubmit = () => {
     if(!newToken.token || !newToken.balance) return alert('Make sure to fill both inputs');
+    let tokenAlreadyExists = false;
+    if(token) tokenAlreadyExists = token.some((element) => element.token === newToken.token);
+    if(tokenAlreadyExists) return alert('Token already exists');
     setToken(prevTokens => [...prevTokens, newToken])
     localStorage.setItem("tokens", JSON.stringify([...token, newToken]));
     history.push('/');
