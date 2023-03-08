@@ -1,0 +1,46 @@
+.table-container {
+    color: white;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .table {
+    border-spacing: 50px 20px;
+  }
+
+  .icon-container {
+    align-items: center;
+    display: flex;
+  }
+
+  .edit-icon {
+    font-size: small;
+    padding-right: 7px;
+  }
+  
+  .tokens-column {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .balance-column {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-align: end;
+  }
+  
+  .token,
+  .balance {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  .edit-icon {
+    padding-right: 8px;
+  }
+  
+  .balance {
+    vertical-align: bottom;
+  }
+  

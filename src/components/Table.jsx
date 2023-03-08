@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import ReactTable from 'react-table-6'
 import TokensProvider from '../context/TokensProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import './Table.css';
 
 export default function Table() {
     const history = useHistory();
@@ -18,20 +18,26 @@ export default function Table() {
         if(localStorage.length > 0) setToken(storedTokens);
     }, [setToken])
 
-    const columns = [ {
-      Cell: ({ index }) => (<FontAwesomeIcon icon={faPenToSquare} onClick={() => redirectToEditToken(index)} />)
-    },     {
-        Header: 'Token',
-        accessor: 'token',
-      },
-      {
-        Header: 'Balance',
-        accessor: 'balance'
-      }];
-
   return (
-    <div>
-        {token.length > 0 && (<ReactTable data={token} columns={columns} defaultPageSize={5} pageSizeOptions={[2, 4, 6]} />)}
+    <div className="table-container">
+      <table className="table">
+        <thead>
+          <tr>
+            <th className="tokens-column">Tokens</th>
+            <th className="balance-column">Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {token.map((element, index) => {
+            return (
+              <tr key={index}>
+                <td className="token"><div className="icon-container"><FontAwesomeIcon className="edit-icon" icon={faPenToSquare} onClick={() => redirectToEditToken(index)} />{element.token}</div></td>
+                <td className="balance">{element.balance}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }
