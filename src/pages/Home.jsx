@@ -12,16 +12,16 @@ export default function Home() {
         history.push('/add-token');
 }
   return (
-    <div className="body">
+    <div>
         <div className="logo-container">
           <img className="logo" src={Logo} alt="logo" />
           </div>
         <div className="header-container">
             <div className="title-star-wrapper">
-              <div><img className="shooting-star"src={ShootingStar} alt="shooting star icon" /></div>
+              <div><img className="shooting-star" src={ShootingStar} alt="shooting star icon" /></div>
               <h2 className="title">Wish Wallet</h2>
               </div>
-            <div className="button-wrapper"><button className="button" type="button" onClick={ redirectToAddToken }>Add Token</button></div>
+            <div className="button-wrapper"><button className="add-token-button" type="button" onClick={ redirectToAddToken }>Add Token</button></div>
         </div>
         <Table />
     </div>
