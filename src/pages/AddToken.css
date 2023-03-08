@@ -78,7 +78,7 @@
     width: 400px;
   }
   
-.add-token-button {
+.save-token-button {
     background-color: #AA33B5;
     border: 1px solid #AA33B5;
     border-radius: 7px;
@@ -90,13 +90,12 @@
     font-weight: 600;
     justify-content: center;
     line-height: 24px;
+    margin: 20px 0 0 310px;
     width: 110px;
 }
 
-.button:hover {
-    background-color: #005fa3;
-}
-
-.add-token-button {
-    margin: 20px 0 0 310px;
+.save-token-button:hover {
+    background-color: #AA50B5;
+    align-items: center;
+    transition: 0.2ms;
 }

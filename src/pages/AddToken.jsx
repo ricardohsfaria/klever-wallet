@@ -75,7 +75,7 @@ export default function AddToken() {
     onChange={ handleChange }
     value={newToken.balance}
   />
-  <button className="add-token-button" type="button" onClick={ handleSubmit }>Save</button>
+  <button className="save-token-button" type="button" onClick={ handleSubmit }>Save</button>
 </form>
     </div>
   )

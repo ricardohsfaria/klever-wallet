@@ -21,7 +21,7 @@ export default function Home() {
               <div><img className="shooting-star" src={ShootingStar} alt="shooting star icon" /></div>
               <h2 className="title">Wish Wallet</h2>
               </div>
-            <div className="button-wrapper"><button className="add-token-button" type="button" onClick={ redirectToAddToken }>Add Token</button></div>
+            <div className="button-wrapper"><button className="button" type="button" onClick={ redirectToAddToken }>Add Token</button></div>
         </div>
         <Table />
     </div>
