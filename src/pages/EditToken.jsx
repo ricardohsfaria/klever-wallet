@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Logo from '../assets/logo.svg';
 import ShootingStar from '../assets/shooting-star.svg';
 import TokensProvider from '../context/TokensProvider';
+import './EditToken.css';
 
 export default function EditToken() {
   const history = useHistory();
@@ -63,37 +64,41 @@ export default function EditToken() {
 
   return (
     <div>
-      <div><img src={Logo} alt="logo" /></div>
-      <div>
-        <img src={ShootingStar} alt="shooting star" />
-        <h2>Wish Wallet</h2>
+      <div className="logo-container"><img className="logo"src={Logo} alt="logo" /></div>
+      <div className="title-star-wrapper-add">
+        <img className="shooting-star" src={ShootingStar} alt="shooting star" />
+        <h2 className="title">Wish Wallet</h2>
       </div>
-      <div>
-        <h3>Edit Token</h3>
-        <button type="button" onClick={handleReturn}>Voltar</button>
+      <div className="edit-token-wrapper">
+        <h3 className="edit-token-text">Edit Token</h3>
+        <div className="edit-button-wrapper"><button className="edit-button" type="button" onClick={handleReturn}>Voltar</button></div>
       </div>
-      <form>
-        <label htmlFor="token">
+      <form className="form">
+        <label className="label" htmlFor="token">Token</label>
           <input
+            className="input"
             required
             name="token"
             type="text"
             value={editedToken.token || ''}
             onChange={handleChange}
           />
-        </label>
-        <label htmlFor="balance">
+        <label className="label" htmlFor="balance">Balance</label>
           <input
+            className="input"
             required
             name="balance"
             type="number"
             value={editedToken.balance || ''}
             onChange={handleChange}
           />
-        </label>
-        <div>
-        <button type="button" onClick={handleDeletion}>Remove</button>
-        <button type="button" onClick={handleSubmit}>Save</button>
+        <div className="buttons-wrapper">
+          <div>
+            <button className="remove-token-button" type="button" onClick={handleDeletion}>Remove</button>
+          </div>
+          <div>
+            <button className="edit-token-button" type="button" onClick={handleSubmit}>Save</button>
+          </div>
         </div>
       </form>
     </div>

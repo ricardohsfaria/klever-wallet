@@ -52,7 +52,7 @@ export default function AddToken() {
       </div>
       <div className="add-token-wrapper">
         <h3 className="add-token-text">Add Token</h3>
-        <div className="button-wrapper"><button className="add-button"type="button" onClick={ handleReturn }>Voltar</button></div>
+        <div className="back-button-wrapper"><button className="add-button"type="button" onClick={ handleReturn }>Voltar</button></div>
       </div>
       <form className="form" action="submit">
   <label className="label" for="token">Token</label>
