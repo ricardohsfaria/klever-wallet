@@ -10,6 +10,8 @@ export default function AddToken() {
   const { token, setToken } = useContext(TokensProvider);
   const [newToken, setNewToken] = useState([]);
   const [validated, setValidation] = useState(false);
+  const [goBack, setGoBack] = useState(false);
+  const [settedToken, setSettedToken] = useState(false);
 
   const handleChange = ({ target }) => {
     const { name, value } = target;
@@ -31,16 +33,25 @@ export default function AddToken() {
     validateForm();
     if(validated) {
       setToken(prevTokens => [...prevTokens, newToken]);
-      history.push('/');
     }
+    setSettedToken(true);
   }
-
+  
   useEffect(() => {
-    localStorage.setItem("tokens", JSON.stringify([...token, newToken]));
+    if(settedToken) history.push('/');
   })
 
+  useEffect(() => {
+    if(goBack) {
+      localStorage.setItem("tokens", JSON.stringify(token));
+      history.push('/');
+    } else {
+      localStorage.setItem("tokens", JSON.stringify([...token, newToken]));
+    }
+})
+
   const handleReturn = () => {
-    history.push('/');
+    setGoBack(true);
   }
 
   return (
@@ -52,7 +63,7 @@ export default function AddToken() {
       </div>
       <div className="add-token-wrapper">
         <h3 className="add-token-text">Add Token</h3>
-        <div className="back-button-wrapper"><button className="add-button"type="button" onClick={ handleReturn }>Voltar</button></div>
+        <div className="back-button-wrapper"><button className="add-button"type="button" onClick={ handleReturn }>Return</button></div>
       </div>
       <form className="form" action="submit">
   <label className="label" for="token">Token</label>
