@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../helpers/renderWithRouter';
 
-describe('Home componente...', () => {
+describe('Home component...', () => {
     it('renders the title correctly', () => {
       renderWithRouter(<App />);
       const title = screen.getByRole('heading', { name: /wish wallet/i });

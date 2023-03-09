@@ -66,6 +66,7 @@ export default function AddToken() {
   <label className="label" for="token">Token</label>
   <input
     className="input"
+    data-testid="token-input"
     required
     id="token"
     name="token"
@@ -76,6 +77,7 @@ export default function AddToken() {
   <label className="label" for="balance">Balance</label>
   <input
     className="input"
+    data-testid="balance-input"
     required
     id="balance"
     name="balance"
