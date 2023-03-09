@@ -36,10 +36,6 @@ export default function AddToken() {
     }
     setSettedToken(true);
   }
-  
-  useEffect(() => {
-    if(settedToken) history.push('/');
-  })
 
   useEffect(() => {
     if(goBack) {
@@ -48,6 +44,7 @@ export default function AddToken() {
     } else {
       localStorage.setItem("tokens", JSON.stringify([...token, newToken]));
     }
+    if(settedToken) history.push('/');
 })
 
   const handleReturn = () => {
