@@ -41,7 +41,7 @@ export default function AddToken () {
       localStorage.setItem('tokens', JSON.stringify(token))
       history.push('/')
     } else {
-      localStorage.setItem('tokens', JSON.stringify([...token, newToken]))
+      localStorage.setItem('tokens', JSON.stringify([...token]))
     }
     if (settedToken) history.push('/')
   })

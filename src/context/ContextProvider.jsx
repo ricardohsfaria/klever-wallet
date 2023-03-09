@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import TokensProvider from './TokensProvider'
 
 export default function ContextProvider ({ children }) {
-  const [token, setToken] = useState([{}])
+  const [token, setToken] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(null)
 
   const GLOBAL_CONTEXT = useMemo(() => ({
