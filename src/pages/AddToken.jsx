@@ -1,24 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react'
-import TokensProvider from '../context/TokensProvider';
-import Logo from '../assets/logo.svg';
-import { useHistory } from 'react-router-dom';
-import ShootingStar from '../assets/shooting-star.svg';
-import './AddToken.css';
+import TokensProvider from '../context/TokensProvider'
+import Logo from '../assets/logo.svg'
+import { useHistory } from 'react-router-dom'
+import ShootingStar from '../assets/shooting-star.svg'
+import './AddToken.css'
 
-export default function AddToken() {
-  const history = useHistory();
-  const { token, setToken } = useContext(TokensProvider);
-  const [newToken, setNewToken] = useState([]);
-  const [goBack, setGoBack] = useState(false);
-  const [settedToken, setSettedToken] = useState(false);
+export default function AddToken () {
+  const history = useHistory()
+  const { token, setToken } = useContext(TokensProvider)
+  const [newToken, setNewToken] = useState([])
+  const [goBack, setGoBack] = useState(false)
+  const [settedToken, setSettedToken] = useState(false)
 
   const handleChange = ({ target }) => {
-    const { name, value } = target;
+    const { name, value } = target
     setNewToken(prevState => ({
       ...prevState,
-      [name]: value.toUpperCase(),
-    }));
-  };
+      [name]: value.toUpperCase()
+    }))
+  }
 
   // const validateForm = () => {
   //   let tokenAlreadyExists = false;
@@ -28,26 +28,26 @@ export default function AddToken() {
   // }
 
   const handleSubmit = () => {
-    let tokenAlreadyExists = false;
-    if(token) tokenAlreadyExists = token.some((element) => element.token === newToken.token);
-    if(tokenAlreadyExists) return alert('Token already exists');
-    if(!newToken.token || !newToken.balance) return alert('Make sure to fill all fields');
-    setToken(prevTokens => [...prevTokens, newToken]);
-    setSettedToken(true);
+    let tokenAlreadyExists = false
+    if (token) tokenAlreadyExists = token.some((element) => element.token === newToken.token)
+    if (tokenAlreadyExists) return alert('Token already exists')
+    if (!newToken.token || !newToken.balance) return alert('Make sure to fill all fields')
+    setToken(prevTokens => [...prevTokens, newToken])
+    setSettedToken(true)
   }
 
   useEffect(() => {
-    if(goBack) {
-      localStorage.setItem("tokens", JSON.stringify(token));
-      history.push('/');
+    if (goBack) {
+      localStorage.setItem('tokens', JSON.stringify(token))
+      history.push('/')
     } else {
-      localStorage.setItem("tokens", JSON.stringify([...token, newToken]));
+      localStorage.setItem('tokens', JSON.stringify([...token, newToken]))
     }
-    if(settedToken) history.push('/');
-})
+    if (settedToken) history.push('/')
+  })
 
   const handleReturn = () => {
-    setGoBack(true);
+    setGoBack(true)
   }
 
   return (

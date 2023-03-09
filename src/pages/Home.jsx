@@ -1,16 +1,16 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom';
-import Logo from '../assets/logo.svg';
-import Table from '../components/Table';
-import ShootingStar from '../assets/shooting-star.svg';
-import './Home.css';
+import { useHistory } from 'react-router-dom'
+import Logo from '../assets/logo.svg'
+import Table from '../components/Table'
+import ShootingStar from '../assets/shooting-star.svg'
+import './Home.css'
 
-export default function Home() {
-    const history = useHistory();
+export default function Home () {
+  const history = useHistory()
 
-    const redirectToAddToken = () => {
-        history.push('/add-token');
-}
+  const redirectToAddToken = () => {
+    history.push('/add-token')
+  }
   return (
     <div>
         <div className="logo-container">

@@ -1,33 +1,33 @@
-import { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import Logo from '../assets/logo.svg';
-import ShootingStar from '../assets/shooting-star.svg';
-import TokensProvider from '../context/TokensProvider';
-import './EditToken.css';
+import React, { useState, useEffect, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import Logo from '../assets/logo.svg'
+import ShootingStar from '../assets/shooting-star.svg'
+import TokensProvider from '../context/TokensProvider'
+import './EditToken.css'
 
-export default function EditToken() {
-  const history = useHistory();
-  const { token, setToken, selectedIndex } = useContext(TokensProvider);
-  const [editedToken, setEditedToken] = useState({});
-  const [updated, setUpdate] = useState(false);
+export default function EditToken () {
+  const history = useHistory()
+  const { token, setToken, selectedIndex } = useContext(TokensProvider)
+  const [editedToken, setEditedToken] = useState({})
+  const [updated, setUpdate] = useState(false)
 
   useEffect(() => {
     if (selectedIndex >= 0 && selectedIndex < token.length) {
-      setEditedToken({ ...token[selectedIndex] });
+      setEditedToken({ ...token[selectedIndex] })
     }
-  }, [selectedIndex, token]);
+  }, [selectedIndex, token])
 
   const handleReturn = () => {
-    history.push('/');
-  };
+    history.push('/')
+  }
 
   const handleChange = ({ target }) => {
-    const { name, value } = target;
+    const { name, value } = target
     setEditedToken((prevState) => ({
       ...prevState,
-      [name]: value,
-    }));
-  };
+      [name]: value
+    }))
+  }
 
   // const validateForm = () => {
   //   if(!editedToken.token || !editedToken.balance) return alert('Make sure to fill all fields');
@@ -35,24 +35,24 @@ export default function EditToken() {
   // }
 
   const handleSubmit = () => {
-      if(!editedToken.token || !editedToken.balance) return alert('Make sure to fill all fields');
-      const newTokens = [...token];
-      newTokens[selectedIndex] = editedToken;
-      setToken(newTokens);
-      localStorage.setItem('tokens', JSON.stringify(newTokens));
-      history.push('/');
-  };
+    if (!editedToken.token || !editedToken.balance) return alert('Make sure to fill all fields')
+    const newTokens = [...token]
+    newTokens[selectedIndex] = editedToken
+    setToken(newTokens)
+    localStorage.setItem('tokens', JSON.stringify(newTokens))
+    history.push('/')
+  }
 
   useEffect(() => {
-    if(token) localStorage.setItem("tokens", JSON.stringify(token));
-    if(updated) history.push('/');
+    if (token) localStorage.setItem('tokens', JSON.stringify(token))
+    if (updated) history.push('/')
   })
 
   const handleDeletion = () => {
-    const updatedTokens = token.filter((element) => element !== token[selectedIndex]);
-    if(window.confirm("Are you sure you want to delete this token?")) {
-      setToken(updatedTokens);
-      setUpdate(true);
+    const updatedTokens = token.filter((element) => element !== token[selectedIndex])
+    if (window.confirm('Are you sure you want to delete this token?')) {
+      setToken(updatedTokens)
+      setUpdate(true)
     }
   }
 
