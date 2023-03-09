@@ -31,7 +31,7 @@ export default function Table() {
           {token.map((element, index) => {
             return (
               <tr key={index}>
-                <td className="token"><div className="icon-container"><FontAwesomeIcon className="edit-icon" icon={faPenToSquare} onClick={() => redirectToEditToken(index)} />{element.token}</div></td>
+                <td className="token"><div className="icon-container" ><FontAwesomeIcon className="edit-icon" data-testid="edit-icon" icon={faPenToSquare} onClick={() => redirectToEditToken(index)} />{element.token}</div></td>
                 <td className="balance">{element.balance}</td>
               </tr>
             );

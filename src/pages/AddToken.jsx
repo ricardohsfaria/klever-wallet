@@ -9,7 +9,6 @@ export default function AddToken() {
   const history = useHistory();
   const { token, setToken } = useContext(TokensProvider);
   const [newToken, setNewToken] = useState([]);
-  const [validated, setValidation] = useState(false);
   const [goBack, setGoBack] = useState(false);
   const [settedToken, setSettedToken] = useState(false);
 
@@ -21,19 +20,19 @@ export default function AddToken() {
     }));
   };
 
-  const validateForm = () => {
+  // const validateForm = () => {
+  //   let tokenAlreadyExists = false;
+  //   if(token) tokenAlreadyExists = token.some((element) => element.token === newToken.token);
+  //   if(tokenAlreadyExists) return alert('Token already exists');
+  //   if(!newToken.token || !newToken.balance) return alert('Make sure to fill all fields');
+  // }
+
+  const handleSubmit = () => {
     let tokenAlreadyExists = false;
     if(token) tokenAlreadyExists = token.some((element) => element.token === newToken.token);
     if(tokenAlreadyExists) return alert('Token already exists');
     if(!newToken.token || !newToken.balance) return alert('Make sure to fill all fields');
-    setValidation(true);
-  }
-
-  const handleSubmit = () => {
-    validateForm();
-    if(validated) {
-      setToken(prevTokens => [...prevTokens, newToken]);
-    }
+    setToken(prevTokens => [...prevTokens, newToken]);
     setSettedToken(true);
   }
 
@@ -63,7 +62,7 @@ export default function AddToken() {
         <div className="back-button-wrapper"><button className="add-button"type="button" onClick={ handleReturn }>Return</button></div>
       </div>
       <form className="form" action="submit">
-  <label className="label" for="token">Token</label>
+  <label className="label" htmlFor="token">Token</label>
   <input
     className="input"
     data-testid="token-input"
@@ -72,9 +71,8 @@ export default function AddToken() {
     name="token"
     type="text"
     onChange={ handleChange }
-    value={newToken.token}
   />
-  <label className="label" for="balance">Balance</label>
+  <label className="label" htmlFor="balance">Balance</label>
   <input
     className="input"
     data-testid="balance-input"
@@ -82,8 +80,8 @@ export default function AddToken() {
     id="balance"
     name="balance"
     type="number"
-    onChange={ handleChange }
     value={newToken.balance}
+    onChange={ handleChange }
   />
   <button className="save-token-button" type="button" onClick={ handleSubmit }>Save</button>
 </form>

@@ -1,19 +1,11 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from '../helpers/renderWithRouter';
-import TokensProvider from '../context/TokensProvider';
-import { act } from 'react-dom/test-utils';
 
-const setToken = jest.fn();
-
-const mockedContext = {
-    token: {
-      balance: 0,
-      token: '',
-    },
-  };
+const ALL_FIELDS_ERROR = 'Make sure to fill all fields';
+const TOKEN_EXISTS_ERROR = 'Token already exists';
 
 describe('AddToken component...', () => {
     it('renders the title correctly', () => {
@@ -35,6 +27,9 @@ describe('AddToken component...', () => {
     expect(pathname).toBe('/');
 });
 it('display an alert when one of the fields were left empty', () => {
+    jest.spyOn(global, 'alert').mockResolvedValue(
+        { ALL_FIELDS_ERROR },
+      );
     renderWithRouter(<App />, '/add-token');
     
     const tokenInput = screen.getByTestId('token-input');
@@ -45,15 +40,18 @@ it('display an alert when one of the fields were left empty', () => {
     userEvent.type(balanceInput, '');
     userEvent.click(saveButton);
 
-    expect(global.alert).toHaveBeenCalledWith('Make sure to fill all fields');
+    expect(global.alert).toHaveBeenCalledWith(ALL_FIELDS_ERROR);
 
     userEvent.clear(tokenInput);
     userEvent.type(balanceInput, '0,0000000032');
     userEvent.click(saveButton);
 
-    expect(global.alert).toHaveBeenCalledWith('Make sure to fill all fields');
+    expect(global.alert).toHaveBeenCalledWith(ALL_FIELDS_ERROR);
 });
 it('displays an alert when a token already exists in the wallet', () => {
+    jest.spyOn(global, 'alert').mockResolvedValue(
+        { TOKEN_EXISTS_ERROR },
+      );
     const { history } = renderWithRouter(<App />, '/add-token');
     
     const tokenInput = screen.getByTestId('token-input');
@@ -61,39 +59,51 @@ it('displays an alert when a token already exists in the wallet', () => {
     const saveButton = screen.getByText(/save/i);
 
     userEvent.type(tokenInput, 'BTC');
-    userEvent.type(balanceInput, '0,0000000032');
+    userEvent.type(balanceInput, '0.0000000032');
     userEvent.click(saveButton);
 
-    history.push('/add-token');
+    console.log(history.location.pathname);
 
-    userEvent.type(tokenInput, 'BTC');
-    userEvent.type(balanceInput, '0,0000000032');
-    userEvent.click(saveButton);
+    const { location: { pathname } } = window;
 
-    expect(global.alert).toHaveBeenCalledWith('Token already exists');
+    act(() => {
+        history.push('/');
+        expect(pathname).toBe('/');
+    });
+
+    act(() => {
+        history.push('/add-token');
+        const { location: { pathname } } = window;
+        expect(pathname).toBe('/add-token');
+    });
+
+    const tokenInputt = screen.getByTestId('token-input');
+    const balanceInputt = screen.gteByTestId('balance-input');
+    const saveButtont = screen.getByText(/save/i);
+
+    userEvent.type(tokenInputt, 'BTC');
+    userEvent.type(balanceInputt, '0.0000000032');
+    userEvent.click(saveButtont);
+
+    expect(global.alert).toHaveBeenCalledWith(TOKEN_EXISTS_ERROR);
 });
-  it('changes the state from the components', () => {
-    const { history } = renderWithRouter(
-    <TokensProvider.Provider value={ mockedContext }>
-        <App />
-      </TokensProvider.Provider>
-    );
-
-    act(() => history.push('/add-token'));
-
+it('adds a token', async () => {
+    renderWithRouter(<App />, '/add-token');
+  
     const tokenInput = screen.getByTestId('token-input');
     const balanceInput = screen.getByTestId('balance-input');
     const saveButton = screen.getByText(/save/i);
-    
+  
     userEvent.type(tokenInput, 'BTC');
-    userEvent.type(balanceInput, '0,0000000032');
+    userEvent.type(balanceInput, '0.0000000032');
     userEvent.click(saveButton);
 
+    const btc = screen.getByText(/btc/i);
+    const balance = screen.getByText(/0.0000000032/i);
+  
     act(() => {
-        expect(setToken).toHaveBeenCalledWith({
-            balance: '0,0000000032',
-            token: 'BTC',
-          });
+        expect(btc).toHaveTextContent('BTC');
+        expect(balance).toHaveTextContent('0.0000000032');
     });
-});
+  });
 });

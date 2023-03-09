@@ -9,7 +9,6 @@ export default function EditToken() {
   const history = useHistory();
   const { token, setToken, selectedIndex } = useContext(TokensProvider);
   const [editedToken, setEditedToken] = useState({});
-  const [validated, setValidation] = useState(false);
   const [updated, setUpdate] = useState(false);
 
   useEffect(() => {
@@ -30,23 +29,18 @@ export default function EditToken() {
     }));
   };
 
-  const validateForm = () => {
-    let tokenAlreadyExists = false;
-    if(token) tokenAlreadyExists = token.some((element) => element.token === editedToken.token);
-    if(tokenAlreadyExists) return alert('Token already exists');
-    if(!editedToken.token || !editedToken.balance) return alert('Make sure to fill all fields');
-    setValidation(true);
-  }
+  // const validateForm = () => {
+  //   if(!editedToken.token || !editedToken.balance) return alert('Make sure to fill all fields');
+  //   setValidation(true);
+  // }
 
   const handleSubmit = () => {
-    validateForm();
-    if(validated) {
+      if(!editedToken.token || !editedToken.balance) return alert('Make sure to fill all fields');
       const newTokens = [...token];
       newTokens[selectedIndex] = editedToken;
       setToken(newTokens);
       localStorage.setItem('tokens', JSON.stringify(newTokens));
       history.push('/');
-    }
   };
 
   useEffect(() => {
@@ -71,12 +65,13 @@ export default function EditToken() {
       </div>
       <div className="edit-token-wrapper">
         <h3 className="edit-token-text">Edit Token</h3>
-        <div className="edit-button-wrapper"><button className="edit-button" type="button" onClick={handleReturn}>Voltar</button></div>
+        <div className="edit-button-wrapper"><button className="edit-button" type="button" onClick={handleReturn}>Return</button></div>
       </div>
       <form className="form">
         <label className="label" htmlFor="token">Token</label>
           <input
             className="input"
+            data-testid="token-input"
             required
             name="token"
             type="text"
@@ -86,6 +81,7 @@ export default function EditToken() {
         <label className="label" htmlFor="balance">Balance</label>
           <input
             className="input"
+            data-testid="balance-input"
             required
             name="balance"
             type="number"
