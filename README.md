@@ -1,80 +1,24 @@
-# Klever - Junior Frontend Test
+# Klever Wallet
+This is a repository containing a web application for managing cryptocurrency. The Klever Wallet allows users to store, edit, and remove their crypto assets to have a better control of their investments. This application was developed for a recruiting process at Klever (https://klever.io/en).
 
-Hello, this is the Frontend test for junior developers from Klever. The objective is to analyze the skills of candidates, focusing on the core fundamentals of HTML, CSS, and JS.
+## Installation
+To run the application locally, follow these steps:
 
-## Pages
+Clone this repository: git clone https://github.com/ricardohsfaria/klever-wallet.git<br />
+Enter the created directory: cd klever-wallet<br />
+Install the dependencies: npm install<br />
+Start the application: npm start<br />
+The application should be available at http://localhost:3000/.
 
-All the pages image are in the `./screens` folder
+## Usage
+After starting the Klever Wallet application, users can start filling their assets. This application provides features for managing cryptocurrency the assets, including:
 
-### 1) Home
+Storing cryptocurrency and balance<br />
+Editing and removing cryptocurrency<br />
+Accessing wallet balances<br />
 
-![Home](https://github.com/klever-io/frontend-junior-test/blob/master/screens/Home.jpg)
+## Contribution
+Contributions are welcome! Feel free to open an issue or send a pull request with improvements or fixes.
 
-#### Actions
-
-- When clicking on the "Add Token" button go to the "Add Token" page
-- When click on the icon "Edit" go to the "Edit Token" page
-
-### 2) Add Token
-
-![Add Token](https://github.com/klever-io/frontend-junior-test/blob/master/screens/AddToken.jpg)
-
-#### Form
-
-- The Token field is required
-- The Balance field is required
-
-#### Actions
-
-- When clicking on the "Back" button go to the "Home" page
-- When clicking on the icon "Save" button
-  - Save the data in localStorage from Browser
-  - Navigate user to home page
-
-#### Bonus
-
-- The Token name should be unique, the user shouldn't has token names repeated
-- Display the error messages from the form to the user
-
-### 3) Edit Token
-
-![Edit Token](https://github.com/klever-io/frontend-junior-test/blob/master/screens/EditToken.jpg)
-
-#### Actions
-
-- When clicking on the "Back" button go to the "Home" page
-- When clicking on the "Save" button
-  - Save the data in localStorage
-  - Navigate user to home page
-- When clicking on the "Remove" button
-  - Remove the date from local storage
-  - Navigate user to home page
-
-#### Bonus
-
-- When the user clicks on the "Remove" button should display an alert to the user to confirm the remotion.
-  - If confirmed, the token should be deleted
-  - If denied, the alert closes and the token not should be deleted,
-
-## Assets
-
-All assets are in the `./assets` folder
-
-## Bonus
-
-- Use the React Framework
-- Unit Tests
-
-## FAQ
-
-1. Can I just use HTML, CSS, JS?
-
-- Yes
-
-2. Can I use other javascript frameworks?
-
-- Yes
-
-3. Can I use some CSS framework like Bootstrap, Material UI?
-
-- Yes, and try to follow the proposed design
+## License
+There is no license associated with this repository.
