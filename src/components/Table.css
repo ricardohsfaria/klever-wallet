@@ -44,3 +44,20 @@
     vertical-align: bottom;
   }
   
+  @media ( min-width: 768px ) {
+    .edit-icon {
+      font-size: medium;
+    }
+    
+    .tokens-column {
+      font-size: 1.2rem;
+    }
+  
+    .balance-column {
+      font-size: 1.2rem;
+    }
+    .token,
+    .balance {
+      font-size: 32px;
+    }
+}

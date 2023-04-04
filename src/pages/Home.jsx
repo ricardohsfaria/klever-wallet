@@ -6,6 +6,7 @@ import ShootingStar from '../assets/shooting-star.svg'
 import './Home.css'
 
 export default function Home () {
+  document.title = 'Wish Wallet'
   const history = useHistory()
 
   const redirectToAddToken = () => {
