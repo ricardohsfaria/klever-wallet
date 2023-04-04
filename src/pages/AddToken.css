@@ -100,6 +100,47 @@
     transition: 0.2ms;
 }
 
+@media ( max-width: 431px ) {
+    .title-star-wrapper-add {
+        padding-right: 0;
+    }
+    .header-container {
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .title-star-wrapper {
+        justify-content: center;
+        padding-right: 0;
+    }
+    .add-token-text {
+        margin-right: 2.5rem;
+    }
+    .add-button {
+        align-items: center;
+        border-radius: 5px;
+        height: 1.5rem;
+        width: 4.5rem;
+        font-size: 0.6rem;
+    }
+    .input {
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 10px;
+        width: 12rem;
+      }
+      .label {
+        margin-right: 9.5rem;
+    }
+    .label:first-child {
+        margin-right: 10.5rem;
+    }
+    .save-token-button {
+        margin: 20px 0 0 6rem;
+    }
+}
+
 @media ( min-width: 768px ) {
     .shooting-star {
     width: 4rem;
