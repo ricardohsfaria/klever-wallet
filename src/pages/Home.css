@@ -55,3 +55,27 @@
     width: 40px;
     height: 40px;
 }
+
+@media ( max-width: 431px ) {
+    .header-container {
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .title-star-wrapper {
+        justify-content: center;
+        padding-right: 0;
+    }
+}
+
+@media ( min-width: 768px ) {
+    .shooting-star {
+    width: 100px;
+    height: 100px;
+    }
+    .button {
+        width: 10rem;
+        height: 2rem;
+        align-items: center;
+    }
+}
